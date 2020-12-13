@@ -1,4 +1,4 @@
-# paper list for joint entities and relations extraction[14篇]
+# paper list for joint entities and relations extraction[16篇]
 
 
 
@@ -14,6 +14,8 @@
 
 ### 2.Classifying Relations via Long Short Term Memory Networks along Shortest Dependency Paths [EMNLP2015]
 
+**关键词**：SDP LSTM
+
 **创新点**：最短依存路径中只保存相关信息
 
 多通道的LSTM，通过SDP从异构源进行信息集成
@@ -28,6 +30,8 @@
 
 ### 3.Improved Relation Classification by Deep Recurrent Neural Networks with Data Augmentation [COLING2016]
 
+**关键词**：SDP LSTM
+
 **动机**：浅层结构不能探索不同抽象级别的潜在表示空间
 
 **创新点**：使用深度RNN继续关系分类
@@ -40,11 +44,13 @@
 
 
 
-## 共享参数
+## LSTM
 
 
 
 ### 1.End-to-End Relation Extraction using LSTMs on Sequences and Tree Structures [ACL2016]
+
+**关键词**：SDP Bi-LSTM
 
 **动机**：之前的联合抽取都是基于人工特征的学习
 
@@ -64,6 +70,8 @@
 
 ### 2.Joint entity and relation extraction based on a hybrid neural network [Neurocomputing2017]
 
+**关键词**：LSTM Bi-LSTM CNN
+
 **动机**：*“End-to-End Relation Extraction using LSTMs on Sequences and Tree Structures”* 使用两层线性层进行实体识别，忽略的便签间的长期关系。
 
 **创新点**：将LSTM用于实体识别过程，在关系分类中使用CNN进行解码
@@ -76,37 +84,9 @@
 
 
 
-### 3.Global Normalization of Convolutional Neural Networks for Joint Entity and Relation Classification [EMNLP2017]
+### 3.Adversarial training for multi-context joint entity and relation extraction [EMNLP2018]
 
-**动机**：以往的联合抽取都只是将实体传入关系分类，如果已知实体的类型，那么他们的关系的搜索空间可能会减少
-
-**创新点**：提出了一种全局规范化的方式，将句子直接编码为三个向量的序列，对其分别进行分类
-
-将实体分为六段，分别经过卷积池化后拼接（六段：每个实体将句子分成三段）
-
-**数据集**：ERR
-
-<img src=".\img\5.png" alt="5" style="zoom:67%;" />
-
-
-
-### 4.Going out on a limb: Joint Extraction of Entity Mentions and Relations without Dependency Trees [ACL2017]
-
-**动机**：SPTree 依赖于依存树，将其限制在了句水平的抽取，而且需要良好的依存树
-
-**创新点**：使用attention的RNN进行建模
-
-使用attention的方式来对每个实体进行实体连接
-
-可以解决重叠关系问题（分配1/N的权重）
-
-**数据集**：ACE 05、ACE 04
-
-<img src=".\img\6.png" alt="6" style="zoom:67%;" />
-
-
-
-### 5.Adversarial training for multi-context joint entity and relation extraction [EMNLP2018]
+**关键词**：Bi-LSTM Adversarial
 
 **动机**：第一次将对抗学习应用于联合抽取问题中
 
@@ -122,7 +102,51 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 6.Joint entity recognition and relation extraction as a multi-head selection problem [Expert Systems with Applications2018]
+## CNN
+
+
+
+### 1.Global Normalization of Convolutional Neural Networks for Joint Entity and Relation Classification [EMNLP2017]
+
+**关键词**：CNN
+
+**动机**：以往的联合抽取都只是将实体传入关系分类，如果已知实体的类型，那么他们的关系的搜索空间可能会减少
+
+**创新点**：提出了一种全局规范化的方式，将句子直接编码为三个向量的序列，对其分别进行分类
+
+将实体分为六段，分别经过卷积池化后拼接（六段：每个实体将句子分成三段）
+
+**数据集**：ERR
+
+<img src=".\img\5.png" alt="5" style="zoom:67%;" />
+
+
+
+## LSTM + attention
+
+
+
+### 1.Going out on a limb: Joint Extraction of Entity Mentions and Relations without Dependency Trees [ACL2017]
+
+**关键词**：LSTM Bi-LSTM attention
+
+**动机**：SPTree 依赖于依存树，将其限制在了句水平的抽取，而且需要良好的依存树
+
+**创新点**：使用attention的RNN进行建模
+
+使用attention的方式来对每个实体进行实体连接
+
+可以解决重叠关系问题（分配1/N的权重）
+
+**数据集**：ACE 05、ACE 04
+
+<img src=".\img\6.png" alt="6" style="zoom:67%;" />
+
+
+
+### 2.Joint entity recognition and relation extraction as a multi-head selection problem [Expert Systems with Applications2018]
+
+**关键词**：Bi-LSTM attention
 
 **动机**：前人的特征往往使用很多外部的NLP工具（POS、依存树）
 
@@ -135,6 +159,24 @@ softmax进行实体分类 CRF进行命名实体识别
 **数据集**：ACE 04、ADE、DREC、CoNLL 04
 
 <img src=".\img\8.png" alt="8" style="zoom:67%;" />
+
+
+
+## GNN
+
+
+
+### 1.GraphRel: Modeling Text as Relational Graphs for Joint Entity and Relation Extraction
+
+**关键词**：Bi-LSTM Bi-GCN
+
+**创新点**：提出一种基于GCN的联合抽取方法，使用线性结构和依存结构
+
+一种两阶段的双向GCN结构。第一阶段只为得到两个损失值并向第二阶段传送数据，目的不在于预测结果；第二阶段使用多图GCN，为每一种关系赋予一张关系权重图，在每张图上分别进行GCN，再进行命名实体识别的关系分类。
+
+**数据集**：NYT、WebNLG
+
+<img src=".\img\11.png" alt="11" style="zoom:67%;" />
 
 
 
@@ -175,13 +217,19 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 1.Simplify the Usage of Lexicon in Chinese NER [ACL2020]
+### 1.Semi-supervised classification with graph convolutional networks [ICLR2017]
+
+将切比雪夫多项式的谱域卷积应用于神经网络模型中，得到了一组特征映射公式，并将其应用与半监督分类问题中（结点的半监督分类）
+
+
+
+### 2.Simplify the Usage of Lexicon in Chinese NER [ACL2020]
 
 在表示层，使用一个字符的全部分词来对字符进行表示。
 
 
 
-### 2.Named Entity Recognition for Social Media Texts with Semantic Augmentation [ACL2020]
+### 3.Named Entity Recognition for Social Media Texts with Semantic Augmentation [ACL2020]
 
 **创新点**：将数据（语义）增强用于社交媒体的命名实体识别中，用来解决社交媒体数据样本稀疏问题。本文使用与每个词相近的词对原词进行数据增强，相近的词指的是在embedding中k近邻最短的词。
 
@@ -225,9 +273,13 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 7.DREC
+### 7.WebNLG
 
 
 
-### 8.ADE
+### 8.DREC
+
+
+
+### 9.ADE
 
