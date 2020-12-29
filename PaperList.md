@@ -1,4 +1,4 @@
-# paper list for joint entities and relations extraction[31篇]
+# paper list for joint entities and relations extraction[35篇]
 
 
 
@@ -95,6 +95,22 @@ SDP有限制，可能会丢失一些路径外的有用信息
 **数据集**：
 
 <img src=".\img\14.png" alt="14" style="zoom: 50%;" />
+
+
+
+### 7.Exploiting the Syntax-Model Consistency for Neural Relation Extraction [ACL2020]
+
+**动机**：传统的使用GCN处理依存树的方法，没有很好的泛化能力，可能出现过拟合
+
+同时之前提出的ON-LSTM模型只能考虑到单词左边的信息
+
+**创新点**：本文提出一种基于上下文的**CEON-LSTM**模型，既考虑了左侧的信息也考虑了右侧的信息
+
+提出了两种重要性评分标准，提高关键单词的重要程度。一个是语法重要性评分，使用依存树，距离最短依存路径越近评分越高；另一个是基于模型的重要性评分，这一评分、由CEON-LSTM编码的过程中给出
+
+又提出了语法模型一致性和依存路径相似性的两个评判标准，并给出损失函数
+
+**数据集**：ACE 05
 
 
 
@@ -232,7 +248,7 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 1.GraphRel: Modeling Text as Relational Graphs for Joint Entity and Relation Extraction
+### 1.[GraphRel] GraphRel: Modeling Text as Relational Graphs for Joint Entity and Relation Extraction [ACL2019]
 
 **关键词**：Bi-LSTM Bi-GCN
 
@@ -289,6 +305,16 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
+### 4.End-to-end named entity recognition and relation extraction using pre-trained language models [Arxiv2019]
+
+**动机和创新点**：大多数前人的工作都依赖于外部工具，本文依赖于预训练的语言模型，不使用其他的NLP外部工具，能够较快的训练
+
+**数据集**：ACE 04、ACE 05、CoNLL 04、ADE、I2B2
+
+<img src=".\img\23.png" alt="23" style="zoom: 50%;" />
+
+
+
 ## 命名实体识别方向论文
 
 
@@ -315,6 +341,18 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
+### 3.[SAC] Similarity Based Auxiliary Classifier for Named Entity Recognition [EMNLP2019]
+
+**动机**：传统方法随着实体长度加长结果会恶化，希望找到与实体长度无关的方法
+
+**创新点**：提出一种SAC分类器（基于相似度的辅助分类器），这种分类器使用向量表示标签（是实体或非实体），然后计算这一标签与CNN编码后特征的相似度，进而在特征中添加这种相似度信息
+
+**数据集**：CoNLL 2003、OntoNotes 5.0
+
+<img src=".\img\25.png" alt="25" style="zoom: 50%;" />
+
+
+
 ## 文本分类方向论文
 
 
@@ -337,9 +375,19 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 3.Adversarial Reprogramming of Text Classification Neural Networks [EMNLP2019]
+### 3.Adversarial Reprogramming of Text Classification Neural Networks [EMNLP2019] ×
 
 提出一种对抗重构的方法，将对抗示例的输入空间迁移到神经网络的输入空间，使用一种本文提出的上下文词汇重映射的方法
+
+
+
+### 4.[FP-Net] Feature Projection for Improved Text Classification [ACL2020]
+
+**动机**：一个句子中总有一些带有倾向性的词汇，还有一些没有倾向的词汇，本文希望继续减轻没有倾向词汇的影响
+
+**创新点**：使用一种特征投射的方法，将句子分别投入两种特征提取器。其中一种提取共同特征（没有倾向的特征），另一种提取带有倾向性的特征，引入了一种域适应的方法GRL，特特征投射的方法。
+
+<img src=".\img\24.png" alt="24" style="zoom:50%;" />
 
 
 
@@ -367,7 +415,7 @@ softmax进行实体分类 CRF进行命名实体识别
 
 
 
-### 4.Attention Is All You Need [NeurlPS2017]
+### 4.[Transformer] Attention Is All You Need [NeurlPS2017]
 
 transformer经典之作，只使用attention机制既能做到并行计算，在机器翻译上的效果又好
 
@@ -377,7 +425,7 @@ transformer经典之作，只使用attention机制既能做到并行计算，在
 
 
 
-### 5.Tener: Adapting transformer encoder for named entity recognition [ACL2019]
+### 5.[TENER] Tener: Adapting transformer encoder for named entity recognition [ACL2019]
 
 改进transformer，使之适合于命名实体识别任务中
 
